@@ -1,0 +1,47 @@
+
+// Memastikan JavaScript berhasil dijalankan
+
+console.log("Kerja Yuk Website berhasil dibuka!");
+
+// Menampilkan pesan ketika website selesai dimuat
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Homepage Kerja Yuk sudah siap!");
+});
+
+
+
+const SUPABASE_URL = "MASUKKAN_PROJECT_URL";
+const SUPABASE_KEY = "MASUKKAN_PUBLISHABLE_KEY";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+async function applyJob(jobId) {
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    alert("Silakan login terlebih dahulu!");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("applications")
+    .insert({
+      student_id: user.id,
+      job_id: jobId,
+      status: "Pending"
+    });
+
+  if (error) {
+    alert("Gagal mengirim lamaran: " + error.message);
+    return;
+  }
+
+  alert("Lamaran berhasil dikirim!");
+}
