@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Kerja Yuk</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #202b45;
+        }
+
+        nav {
+            background: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #3155d9;
+            text-decoration: none;
+        }
+
+        nav .links {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+        }
+
+        nav a.active {
+            color: #3155d9;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .welcome {
+            background: linear-gradient(120deg, #3155d9, #718af0);
+            color: white;
+            padding: 40px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search-box button {
+            background: #ffad42;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .section {
+            margin-top: 40px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            font-size: 23px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #eee;
+        }
+
+        .category span {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .jobs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            border: 1px solid #eee;
+            transition: 0.2s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+        }
+
+        .job-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .company {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .job-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .job-info span {
+            background: #eef2ff;
+            color: #3155d9;
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background: #3155d9;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .status-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        .status {
+            background: white;
+            padding: 25px;
+            flex: 1;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .status h3 {
+            font-size: 28px;
+            color: #3155d9;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            background: white;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            nav .links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .jobs {
+                grid-template-columns: 1fr;
+            }
+
+            .status-box {
+                flex-direction: column;
+            }
+
+            .welcome {
+                padding: 25px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="index.html" class="logo">kerjayuk.</a>
+
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="student.html" class="active">Dashboard</a>
+            <a href="history.html">History</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html">Logout</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- WELCOME SECTION -->
+        <section class="welcome">
+            <h1>Welcome to Kerja Yuk! 👋</h1>
+            <p>
+                Temukan pekerjaan yang sesuai dengan kemampuan dan jadwal
+                kuliahmu. Mulai bangun pengalaman profesionalmu sekarang!
+            </p>
+
+            <form class="search-box" id="searchForm">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Cari pekerjaan, posisi, atau perusahaan..."
+                >
+                <button type="submit">Search Jobs</button>
+            </form>
+        </section>
+
+        <!-- APPLICATION STATUS -->
+        <section class="section">
+            <h2>Your Application Overview</h2>
+
+            <div class="status-box">
+                <div class="status">
+                    <h3 id="totalJobs">0</h3>
+                    <p>Available Jobs</p>
+                </div>
+
+                <div class="status">
+                    <h3>0</h3>
+                    <p>Applied Jobs</p>
+                </div>
+
+                <div class="status">
+                    <h3>0</h3>
+                    <p>Accepted Applications</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        <section class="section">
+            <h2>Explore Categories</h2>
+
+            <div class="categories">
+                <div class="category">
+                    <span>💻</span>
+                    Technology
+                </div>
+
+                <div class="category">
+                    <span>📊</span>
+                    Business
+                </div>
+
+                <div class="category">
+                    <span>🎨</span>
+                    Design
+                </div>
+
+                <div class="category">
+                    <span>📢</span>
+                    Marketing
+                </div>
+            </div>
+        </section>
+
+        <!-- JOB RECOMMENDATIONS -->
+        <section class="section">
+            <h2>Recommended Opportunities</h2>
+
+            <div class="jobs" id="jobList">
+
+                <article class="job-card" data-category="technology">
+                    <h3>Junior Web Developer</h3>
+                    <p class="company">Digital Solutions Company</p>
+
+                    <div class="job-info">
+                        <span>Part-time</span>
+                        <span>Remote</span>
+                        <span>Technology</span>
+                    </div>
+
+                    <p>
+                        Membantu mengembangkan dan memelihara website
+                        perusahaan bersama tim developer.
+                    </p>
+
+                    <br>
+                    <a href="#" class="apply-btn">View Details</a>
+                </article>
+
+                <article class="job-card" data-category="design">
+                    <h3>Graphic Design Intern</h3>
+                    <p class="company">Creative Studio</p>
+
+                    <div class="job-info">
+                        <span>Internship</span>
+                        <span>Hybrid</span>
+                        <span>Design</span>
+                    </div>
+
+                    <p>
+                        Membuat konten visual dan desain kreatif
+                        untuk kebutuhan media sosial perusahaan.
+                    </p>
+
+                    <br>
+                    <a href="#" class="apply-btn">View Details</a>
+                </article>
+
+                <article class="job-card" data-category="business">
+                    <h3>Business Administration Assistant</h3>
+                    <p class="company">Business Partner</p>
+
+                    <div class="job-info">
+                        <span>Part-time</span>
+                        <span>On-site</span>
+                        <span>Business</span>
+                    </div>
+
+                    <p>
+                        Membantu aktivitas administrasi dan
+                        pengelolaan dokumen operasional bisnis.
+                    </p>
+
+                    <br>
+                    <a href="#" class="apply-btn">View Details</a>
+                </article>
+
+                <article class="job-card" data-category="marketing">
+                    <h3>Social Media Specialist</h3>
+                    <p class="company">Media Creative Agency</p>
+
+                    <div class="job-info">
+                        <span>Freelance</span>
+                        <span>Remote</span>
+                        <span>Marketing</span>
+                    </div>
+
+                    <p>
+                        Mengelola konten media sosial dan membantu
+                        meningkatkan engagement audiens.
+                    </p>
+
+                    <br>
+                    <a href="#" class="apply-btn">View Details</a>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Kerja Yuk. Find Your Opportunity.</p>
+        <p>Work Smarter, Study Better.</p>
+    </footer>
+
+    <script>
+        const searchForm = document.getElementById("searchForm");
+        const searchInput = document.getElementById("searchInput");
+        const jobCards = document.querySelectorAll(".job-card");
+
+        document.getElementById("totalJobs").textContent =
+            jobCards.length;
+
+        searchForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const keyword = searchInput.value.toLowerCase();
+
+            jobCards.forEach(function(card) {
+                const content = card.textContent.toLowerCase();
+
+                card.style.display = content.includes(keyword)
+                    ? "block"
+                    : "none";
+            });
+        });
+    </script>
+
+</body>
+</html>
